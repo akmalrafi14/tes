@@ -3,6 +3,9 @@ import EJS from "ejs";
 import cors from "cors";
 import db from "./db";
 import bodyparser from "body-parser";
+import {
+  Route
+} from "./convertjs-master/src/router";
 
 const Server = Express();
 
@@ -12,7 +15,7 @@ Server.use(bodyparser.urlencoded());
 Server.use(cors());
 
 Server.get("/", function (req, res) {
-  res.send("Hello Afghan").end();
+  res.send("Hello Akmal. What do you wanted to do today?").end();
 });
 
 Server.get("/data", (req, res) => {
@@ -89,6 +92,16 @@ Server.post("/login", (req, res) => {
       console.log(error)
       res.status(500).json(error)
     })
+});
+
+
+Server.use("/foto/:img", (req, res) => {
+  const {
+    img
+  } = req.params
+  const path = require('path')
+  const filepath = path.resolve(__dirname + '/../express-backend-for-react-master/convertjs-master/foto/' + img)
+  res.sendFile(filepath)
 });
 
 Server.listen(5700, () => console.log("Server Dimulai"));

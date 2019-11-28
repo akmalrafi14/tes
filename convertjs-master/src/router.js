@@ -8,17 +8,18 @@ import {
 } from "./routersiswa";
 
 import db from "../db/db";
+import Express from "express";
 
 
 export function Route(server) {
-  server.get("/data", ambilDataSiswa);
-  server.get("/cari", cariDataSiswa);
-  server.post("/simpan", simpanDataSiswa);
-  server.delete("/data", deleteDataSiswa);
-  server.put("/simpandata", simpanEditDataSiswa);
-  server.post("/login", login);
+  // server.get("/data", ambilDataSiswa);
+  // server.get("/cari", cariDataSiswa);
+  // server.post("/simpan", simpanDataSiswa);
+  // server.delete("/data", deleteDataSiswa);
+  // server.put("/simpandata", simpanEditDataSiswa);
+  // server.post("/login", login);
 
-  Server.post("/login", (req, res) => {
+  server.post("/login", (req, res) => {
     const {
       username,
       password
@@ -41,4 +42,7 @@ export function Route(server) {
         res.status(500).json(error)
       })
   });
+
+  server.use("/foto", Express.static("./foto"));
+
 }
